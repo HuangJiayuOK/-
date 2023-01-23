@@ -1,0 +1,27 @@
+Question 42
+
+Query List
+Proof( ForAll{n : PositiveInteger},Product({i:PositiveIntegerSequence},2*i-1,1,n)/Product({i:PositiveIntegerSequence},2*i,1,n)>(sqrt(n+1))/(2*n+1))
+
+Global Scope
+0| a : Sequence 
+1| Content( a ) = Number
+2| n:PositiveInteger
+3| ForAll:Item( a , n ) = Product({i:PositiveIntegerSequence},2*i-1,1,n)/(Product({i:PositiveIntegerSequence},2*i,1,n)*((sqrt(n+1))/(2*n+1)))
+
+    \1
+	Q| Item( a , n ) > 1																		|| Method: 归纳法奠基
+	4| n: PositiveInteger																		|| Method: 归纳法奠基
+	5| n = 1 																					|| Method: 归纳法奠基
+	6| Item( a , n ) > 1    																	||3，5 Rule: 计算
+
+	\2
+	Q| Item( a , k+1 ) > 1 				                                                        || Method: 归纳假设
+	7| k: PositiveInteger                                                                       || Method: 归纳假设
+    8| Item( a , k ) > 1                                   			              	            || Method: 归纳假设
+	9| Item( a , k+1 ) = Item ( a , k )*(2*k+3)/(2*sqrt((k+1*(k+2))))			                 ||3 Rule: Expand Product
+	10| Item( a , k+1 ) > Item( a , k ）                                                         ||9 Rule: 计算 
+    11| Item( a , k+1 ) > 1                                                                      ||8,9,10 Rule:计算
+
+12| ForAll( {n : PositiveInteger }, Item( a , n ) > 1 )||6,11 Method: 归纳法
+13| ForAll( {n : PositiveInteger },Product({i:PositiveIntegerSequence},2*i-1,1,n)/Product({i:PositiveIntegerSequence},2*i,1,n)>(sqrt(n+1))/(2*n+1) )|| Rule:等价命题
