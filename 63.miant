@@ -1,0 +1,31 @@
+Question 63
+
+Fact List
+a: Sequence 
+Content( a ) = Number
+Item( a , 1 ) = cot(x)
+ForAll( {n: PositiveInteger , x: Number }, Item( a , n ) = Item( a , n-1 )* cos(x) - sin((n-1)*x))
+
+Query List
+Proof( ForAll( {n: PositiveInteger},{x: Number},Item( a , n ) = cos(n*x)/sin(x) ) )
+
+Global Scope
+0| a: Sequence
+1| Content( a ) = Number
+2| Item( a , 1 ) = cot(x)
+3| ForAll( { n: PositiveInteger },{x: Number },Item( a , n ) = cos(n*x)/sin(x))
+
+    \1
+    Q| Item( a , n ) = cos(n*x)/sin(x)                    || Method: 归纳法奠基
+    4| n: PositiveInteger                                 || Method: 归纳法奠基
+    5| n=1                                                || Method: 归纳法奠基
+    6| Item( a , n ) = cos(n*x)/sin(x)                    ||2,5 Rule: 计算
+
+    \2
+    Q| Item( a , k+1 ) = cos((k+1)*x)/sin(x)              || Method: 归纳假设
+    7| k: PositiveInteger                                 || Method: 归纳假设
+    8| Item ( a , k ) = cos(k*x)/sin(x)                   || Method: 归纳假设
+    9| Item( a ,k+1 ) = Item( a , k )*cos(x) - sin((k-1)*x) ||3,4 Rule:Apply(k+1)
+    10| Item( a , k+1 ) = cos((k+1)*x)/sin(x)               ||8,9 Rule:计算
+
+11| ForAll( {n: PositiveInteger},{x: Number},Item( a , n ) = cos(n*x)/sin(x) )               ||6,10 Method: 归纳法

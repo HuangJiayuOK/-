@@ -1,0 +1,41 @@
+Question 70
+
+
+Fact List
+a: Sequence
+Content( a ) = Number
+Item( a , 1 ) = 1
+S: Sequence
+ForAll( { n: PositiveInteger } , Item( S , n ) = PartialSum( a , 1 , n ))
+ForAll( { n: PositiveInteger } , Item( S , n ) = (n^2)*( Item( a , n ) )  )
+
+Query List
+Proof( { n: PositiveInteger } , Item( a , n ) = 2/( n*(n+1) ) )
+
+Global Scope
+0| a: Sequence
+1| Content( a ) = Number
+2| Item( a , 1 ) = 1
+3| S: Sequence 
+4| ForAll( { n: PositiveInteger } , Item( S , n ) = PartialSum( a , 1 , n ))
+5| ForAll( { n: PositiveInteger } , Item( S , n ) = (n^2)*( Item( a , n ) ) )
+
+    \1
+    Q| Item( a , n ) = 2/( n*(n+1))                              || Method: 归纳法奠基
+    5| n: PositiveInteger                                        || Method: 归纳法奠基
+    6| n = 1                                                     || Method: 归纳法奠基
+    7| Item( a , n ) = 2/( n*(n+1))                              || 2 Rule: 计算
+
+    \2
+    Q| Item( a , k+1 ) = 2/( (k+1)*(k+2) )                       || Method: 归纳法假设
+    8| k: PositiveInteger                                        || Method: 归纳法假设
+    9| Item( a , k ) = 2/( k*(k+1) )                             || Method: 归纳法假设
+    10| Item( S , k+1 ) = PartialSum( a , 1 , k+1 )               || 4 Rule: Apply(k+1)
+    11| Item( S , k+1 ) = ((k+1)^2)*(Item( a , k+1 ))             || 5 Rule: Apply(k+1)
+    12| Item( S , k ) = PartialSum( a , 1 , k )                   ||4 Rule: Apply(k)
+    13| Item( S , k ) =(k^2)*(Item( a , k ))                   ||5 Rule: Apply(k)
+    14| Item( a , k+1 ) = PartialSum( a , 1 , k+1 ) - PartialSum( a , 1 , k)   || Rule: Expand PartialSum
+    15| Item( a , k+1 ) = 2/( (k+1)*(k+2) )                 ||9,10,11,12,13,14 Rule: 计算
+
+16| ForAll( { n: PositiveInteger } , Item( a , n) = 2/( n*(n+1) ) )  || 7,15 Method: 归纳法
+
