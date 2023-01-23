@@ -1,0 +1,37 @@
+Question 45
+
+Query List
+Proof(ForAll {n : PositiveInteger },Sigma({j: PositiveIntegerSequence},1/Product({ i:PositiveIntegerSequence},i,1,j),1,n)<3)
+
+Global Scope
+0| a : Sequence 
+1| Content( a ) = Number
+2| ForAll( {n: PositiveInteger },Item( a , n ) = Sigma({j: PositiveIntegerSequence},1/Product({ i:PositiveIntegerSequence},i,1,j),1,n)<3-(3-1/(2^(n-1))) )
+
+    \1
+	Q| Item( a , n ) <=0																		|| Method: 归纳法奠基
+	3| n: PositiveInteger																		|| Method: 归纳法奠基
+	4| n = 1 																					|| Method: 归纳法奠基
+	5| Item( a , n ) <=0    																	||2，4 Rule: 计算
+
+
+	\2
+	Q| Item( a , k+1 ) <=0				                                                        || Method: 归纳假设
+	6| k: PositiveInteger                                                                       || Method: 归纳假设
+    7| Item( a , k ) <=0                                   			              	            || Method: 归纳假设
+	8| Item( a , k+1 ) = Item ( a , k )+1/Product(i,1,k+1)+1/(2^k)-1/(2^(k-1))			        ||2 Rule: Expand Sigma
+   #9|  1/Product(i,1,k+1)<=1/(2^k)                                                              ||Rule:不等式放缩
+	10| Item( a , k+1 ) <= Item( a , k ）                                                        ||7,8 Rule: 计算 
+    11| Item( a , k+1 ) <=0                                                                     ||7,8,10 Rule:计算
+
+12| ForAll( {n : PositiveInteger,n>1 }, Item( a , n ) <= 0 )||5,10 Method: 归纳法
+
+    \3
+    Q| Sigma(1/Product(i,1,j),1,n)< 3                                              || Method:加强命题
+    13| n:PositiveInteger                                                          || Method:加强命题 
+    14| n >= 1                                                                     || Method:归纳法
+    15| Item( a , n ) <= 0                                                         ||Method: 归纳法           
+    16| Item( a , n ) = Sigma(1/Product(i,1,j),1,n)-(3-1/(2^(n-1)))                ||2 Rule:Apply( n )
+    17| Sigma(1/Product(i,1,j),1,n) <3                                             || 14,15,16  Rule: 计算
+
+18| ForAll( {n : PositiveInteger ,n>1}, Sigma({j: PositiveIntegerSequence},1/Product({ i:PositiveIntegerSequence},i,1,j),1,n)<3 )            || Rule:计算

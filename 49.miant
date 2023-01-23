@@ -1,0 +1,29 @@
+Question 49
+
+Query List
+Proof( ForAll {n: PositiveInteger },{a: PositiveInteger},{b: PositiveInteger} , ( a^n+b^n)/2 >= ( (a+b)/2 )^n )
+
+Global Scope
+0| a : Sequence
+1| Content( a ) = Number
+2| ForAll( {n: PositiveInteger }, Item( a , n ) = 2^(n-1) * (a^n+b^n)/((a+b)^n) )
+
+
+    \1
+    Q| Item( a , n ) >= 0                                             || Method: 归纳法奠基
+    3| n: PositiveInteger                                             || Method: 归纳法奠基
+    4| n = 1                                                          || Method: 归纳法奠基
+    5| Item( a , n ) >= 0                                             ||2，4 Rule: 计算
+
+
+    \2
+    Q| Item( a , k+1 ) >= 0                                                                    || Method: 归纳假设
+    6| k: PositiveInteger                                                                      || Method: 归纳假设
+    7| Item( a , k ) >= 0                                                                      || Method: 归纳假设
+    8| Item( a ,k+1 ) = Item( a , k ) * 2 *( a^(k+1) + b^(k+1) )/( (a^k+b^k)(a+b) )            ||2 Rule: Expand Sigma
+    #9| 2 *( a^(k+1) + b^(k+1) )/( (a^k+b^k)(a+b) ) >=1                                             ||Rule: 不等式
+    10| Item( a , k+1 ) >= Item( a , k )                                                        ||7,8 Rule: 计算
+    11| Item( a , k+1 ) >= 0                                                                   ||Rule: 计算
+
+12| ForAll( {n: PositiveInteger }, Item( a , n ) >=0 )                     ||5,10 Method:归纳法
+13| ForAll( {n: PositiveInteger },( a^n+b^n)/2 >= ( (a+b)/2 )^n            || Rule:等价命题

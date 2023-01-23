@@ -1,0 +1,29 @@
+Question 43
+
+Query List
+Proof( ForAll {n : PositiveInteger ,n>=2}, n^n>Product({i:PositiveIntegerSequence},2*i-1,1,n))
+
+Global Scope
+0| a : Sequence 
+1| Content( a ) = Number
+2| ForAll( {n: PositiveInteger,n>=2},Item( a , n ) = n^n/Product({i:PositiveIntegerSequence},2*i-1,1,n)
+
+
+    \1
+	Q| Item( a , n ) > 1																		|| Method: 归纳法奠基
+	3| n: PositiveInteger																		|| Method: 归纳法奠基
+	4| n = 2 																					|| Method: 归纳法奠基
+	5| Item( a , n ) > 1    																	||2，4 Rule: 计算
+
+
+	\2
+	Q| Item( a , k+1 ) > 1 				                                                        || Method: 归纳假设
+	6| k: PositiveInteger ,k>=2                                                                      || Method: 归纳假设
+    7| Item( a , k ) > 1                                   			              	            || Method: 归纳假设
+	8| Item( a , k+1 ) = Item ( a , k )*((k+1)/k)^k*(k+1)/(2*k+1)			                    ||2 Rule: Expand Sigma
+    #9| ((k+1)/k)^k>2                                                                             ||Rule:计算
+	10| Item( a , k+1 ) > Item( a , k ）                                                         ||7,8 Rule: 计算 
+    11| Item( a , k+1 ) > 1                                                                      ||7,8,10 Rule:计算
+
+12| ForAll( {n : PositiveInteger,n>=2 }, Item( a , n ) > 1 )||5,10 Method: 归纳法
+13| ForAll( {n : PositiveInteger ,n>=2}, ((n+1)/2)^n>product({i:PositiveIntegerSequence},2*i-1,1,n))|| Rule:等价命题

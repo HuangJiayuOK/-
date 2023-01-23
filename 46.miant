@@ -1,0 +1,29 @@
+Question 46
+
+Query List
+Proof( ForAll {n: PositiveInteger,n>=3 },1+Sigma({i:PositiveIntegerSequence},1/sqrt(i),1,n)<2*sqrt(n) )
+
+Global Scope
+0| a: Sequence
+1| Content( a ) = Number
+2| ForAll( { n: PositiveInteger,n>=3},Item( a , n )=1+Sigma({i:PositiveIntegerSequence},1/sqrt(i),1,n)-2*sqrt(n))
+
+
+    \1
+    Q| Item( a , n ) < 0                                    || Method: 归纳法奠基
+    3| n: PositiveInteger                                   || Method: 归纳法奠基
+    4| n = 3                                                || Method: 归纳法奠基
+    5| Item( a , n ) < 0                                    ||2，4 Rule: 计算
+
+
+    \2
+    Q| Item( a , k+1 ) < 0                                   || Method: 归纳假设
+    6| k:PositiveInteger ,k>=3                                  || Method: 归纳假设
+    7| Item( a , k ) < 0                                      || Method: 归纳假设
+    8| Item( a , k+1) = Item( a , k )+1/sqrt(k+1)-2*( sqrt(k+1)-sqrt(k) )      ||2 Rule: Expand Sigma
+    #9| 1/sqrt(k+1)-2*( sqrt(k+1)-sqrt(k) ) < 0 ,k>=3                    ||Rule: 计算
+    10| Item( a , k+1 ) < Item( a , k )                                  ||7,8 Rule: 计算
+    11| Item( a , K+1 ) < 0
+
+12| ForAll( { n: PositiveInteger, n>=3 }, Item( a , n ) < 0 )                ||5，10 Method: 归纳法
+13| ForAll( { n: PositiveInteger, n>=3 }, 1+Sigma({i:PositiveIntegerSequence},1/sqrt(i),1,n)<2*sqrt(n) )  || Rule: 等价命题

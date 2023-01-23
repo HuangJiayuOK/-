@@ -1,0 +1,32 @@
+Question 53
+
+Fact List
+a: Sequence
+Cntent( a ) = PositiveNumber
+ForAll({n: PositiveInteger },Item( a , n+1 ) < Item( a , n )-(Item( a , n ))^2)
+
+Query List
+Proof( ForAll{ n: PositiveInteger },Item( a , n ) < 1/n)
+
+Global Scope
+0|a : Sequence 
+1| Content( a ) = Number
+2| ForAll(Item( a , n )-Item( a , n )^2 > 0)
+3| ForAll(Item( a , n ) < 1   )                                                                     ||2 Rule:计算
+4| ForAll( {n: PositiveInteger },Item( a , n+1 ) < Item( a , n )-(Item( a , n ))^2 )
+
+
+   \1
+   Q| Item( a , n ) < 1/n                                || Method:归纳法奠基
+   5| n: PositiveInteger                                 || Method:归纳法奠基
+   6| n = 1                                              || Method:归纳法奠基
+   7| Item( a , n ) < 1/n                                || 2，3 Rule:计算
+
+   \2
+   Q| Item( a , k+1 ) <1/(k+1)                           || Method: 归纳假设
+   8| k: PositiveInteger                                 || Method: 归纳假设
+   9| Item( a , k ) < 1/k                                 || Method: 归纳假设
+   10| Item( a , k+1 ) = Item( a , k )- (Item( a , k ))^2   ||5 Rule: Apply(k)
+   11| Item( a ,k+1 ) < 1/(k+1)                            ||9,10 Rule: 计算
+
+12| ForAll( { n: PositiveInteger },Item( a , n ) < 1/n )   ||6,11 Method: 归纳法
