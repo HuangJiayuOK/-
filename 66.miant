@@ -1,0 +1,47 @@
+Question 66
+
+Fact List
+x: Sequence
+Content( x ) = Number
+a: PositiveNumber
+Content( a ) > 2
+Item( x , 1 ) = a
+ForAll( {n: PositiveInteger }, Item( x , n+1 ) = Item( x , n )^2/( 2*( Item( x , n ) - 1 ) )  )
+
+Query List
+Proof( ForAll( {n: PositiveInteger }, Item( x , n ) > 2 ) )
+Proof( ForAll( {n: PositiveInteger }, Item( x , n+1 )/Item( x , n ) < 1 ) )
+
+Global Scope
+0| x: Sequence
+1|Content( x ) = Number
+2|a: PositiveNumber
+3|Content( a ) > 2
+4|Item( x , 1 ) = a
+5|ForAll( {n: PositiveInteger }, Item( x , n+1 ) = Item( x , n )^2/( 2*( Item( x , n ) - 1 ) )  )
+
+   \1
+   Q| Item( x , n ) > 2                                   || Method: 归纳法奠基
+   6| n: PositiveInteger                                  || Method: 归纳法奠基
+   7| n = 1                                               || Method: 归纳法奠基
+   8| Item( x , n ) > 2                                   || 3,7 Rule: 计算
+
+
+   \2
+   Q| Item( x , k+1 ) > 2                                 || Method: 归纳假设
+   9| k: PositiveInteger                                  || Method: 归纳假设
+   10| Item( x , k ) > 2                                  || Method: 归纳假设
+   11| Item( x , k+1 ) = Item( x , k )^2/( 2*(Item( x , k )-1 ) )  || 5 Rule: Apply(k+1)
+   12| Item( x , k+1 ) > 2                                || 8,10,11 Rule: 计算
+
+
+13| ForAll({n: PositiveInteger } ,Item( x , n ) > 2 )    || 8,12 Method: 归纳法
+
+
+   \3
+   Q| Item( x , n+1 )/Item( x , n ) < 1                  || Method: 延伸命题
+   14| n: PositiveInteger                                || Method: 延伸命题
+   15| Item( x , n+1 )/Item( x , n ) = Item( x , n )/( 2*(Item( x , n )-1) )   || 5 Rule: 计算
+   16| Item( x , n+1 )/Item( x , n ) < 1                 || 13,15 Rule: 计算
+
+17| ForAll( {n: PositiveInteger } , Item( x , n+1 )/Item( x , n ) < 1 )   || Method: 延伸命题

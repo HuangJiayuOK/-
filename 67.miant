@@ -1,0 +1,33 @@
+Question 67
+
+Fact List
+a: Sequence
+Content( a ) = PositiveNumber
+ForAll( { n: PositiveNumber } , Product( { i: PositiveIntegerSequence } ,Item( a , i ) , 1 , n ) = 1  )
+
+Query List
+Proof( ForAll( { n: PositiveInteger } , Product( { i: PositiveIntegerSequence}, 1+Item( a , i ) , 1 , n ) >= 2^n ) )
+
+Global Scope
+0| a: Sequence
+1| Content( a ) = PositiveNumber
+2| ForAll( { n: PositiveNumber } , Product( { i: PositiveIntegerSequence } ,Item( a , i ) , 1 , n ) = 1  )
+
+ 
+    \1
+    Q| Product( { i: PositiveIntegerSequence}, 1+Item( a , i ) , 1 , n ) >= 2^n || Method: 归纳法奠基
+    3| n: PositiveInteger                                                       || Method: 归纳法奠基
+    4| n = 1                                                                    || Method: 归纳法奠基
+    5| Product( { i: PositiveIntegerSequence } ,Item( a , i ) , 1 , n ) = 1     || 2 Rule: Apply( n )
+    6| Item( a , n ) = 1                                                        || 4 ,5 Rule: 计算
+    7| Product( { i: PositiveIntegerSequence}, 1+Item( a , i ) , 1 , n ) >= 2^n || 6 Rule: 计算
+
+    \2
+    Q| Product( {i: PositiveIntegerSequence} , 1+ Item( a , i ) , 1 , k+1 ) >= 2^(k+1) || Method: 归纳假设
+    8| k: PositiveInteger                                                              || Method: 归纳假设
+    9| Product( { i: PositiveIntegerSequence } ,Item( a , i ) , 1 , k ) = 1            || 2 Rule: Apply(k)
+    10| Product( {i: PositiveIntegerSequence} , 1+ Item( a , i ) , 1 , k ) >= 2^k      || Method: 归纳假设
+    11| Product( { i: PositiveIntegerSequence } ,Item( a , i ) , 1 , k+1 ) = 1         || 2 Rule: Apply(k+1)
+    12| Product( { i: PositiveIntegerSequence } ,1+Item( a , i ) , 1 , k+1 ) >= 2^(k+1)|| 9,10,11 Rule: 计算
+
+13| ForAll( { n: PositiveInteger } , Product( { i: PositiveIntegerSequence}, 1+Item( a , i ) , 1 , n ) >= 2^n )  || Method: 归纳法
